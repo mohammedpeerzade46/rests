@@ -1,0 +1,71 @@
+{
+  "theme": "Light",
+  "archetype": "1 (Organic & Earthy)",
+  "emotional_tone": "Warm, inviting, cozy, family-friendly, and appetizing.",
+  "typography": {
+    "heading_font": "Cormorant Garamond",
+    "body_font": "Outfit",
+    "hierarchy": {
+      "h1": "text-5xl sm:text-6xl lg:text-7xl tracking-tighter font-medium",
+      "h2": "text-4xl sm:text-5xl lg:text-6xl tracking-tight font-medium",
+      "h3": "text-2xl sm:text-3xl tracking-tight font-medium",
+      "h4": "text-xl font-medium",
+      "body": "text-base sm:text-lg leading-relaxed",
+      "label": "text-xs tracking-[0.2em] uppercase font-semibold"
+    }
+  },
+  "colors": {
+    "background": "#FAF9F6",
+    "surface": "#F2EFE9",
+    "primary": "#2A3B2C",
+    "primary_foreground": "#FFFFFF",
+    "secondary": "#E6E1D8",
+    "secondary_foreground": "#2A3B2C",
+    "accent": "#C85A32",
+    "accent_foreground": "#FFFFFF",
+    "muted": "#4A5D4E",
+    "border": "#E6E1D8"
+  },
+  "layout_and_spacing": {
+    "spacing_scale": "Use generous spacing: py-24 or py-32 for sections, gap-8 to gap-12 for grids. Containers with borders must have internal padding (p-8).",
+    "grid_strategy": "MODE A: THE 'TETRIS' GRID for the photo gallery and menu highlights. Mix span ratios (col-span-full, col-span-4, col-span-2) to create asymmetry and negative space.",
+    "alignment": "Optical alignment over geometrical. Left-align dense content; center-align hero text if visually balanced."
+  },
+  "component_instructions": {
+    "structural": "Use pure HTML + Tailwind for sections, overlapping elements, and asymmetrical grids. Avoid standard Shadcn Cards for creative sections.",
+    "interactive": "Use Shadcn components for the Reservation Form (Form, Input, Select, Calendar, Popover, Button). Heavily customize them to match the earthy theme (e.g., remove default Vercel-look, use Terracotta focus rings, rounded-sm). Implement for .js files.",
+    "header": "Crystal Glassmorphism: sticky top-0, z-50, backdrop-blur-xl bg-[#FAF9F6]/80, with a delicate 1px bottom border (border-[#E6E1D8]/50).",
+    "hero_overlay": "If text is over the hero image, use a gradient overlay (bg-gradient-to-r from-[#2A3B2C]/80 via-[#2A3B2C]/40 to-transparent) rather than a flat blanket overlay.",
+    "buttons": "Terracotta (#C85A32) for primary CTA. Hover state must explicitly lighten the hue (e.g., hover:bg-[#D96B43] hover:text-white). Add data-testid attributes to all interactive elements."
+  },
+  "media": {
+    "hero_image": "https://images.pexels.com/photos/12181619/pexels-photo-12181619.jpeg",
+    "about_image": "https://images.unsplash.com/photo-1651440204216-548382747b40",
+    "menu_highlights": [
+      {
+        "category": "Main Course (Biryani)",
+        "url": "https://images.pexels.com/photos/28909536/pexels-photo-28909536.jpeg"
+      },
+      {
+        "category": "Quick Bites",
+        "url": "https://images.unsplash.com/photo-1563379091339-03b21ab4a4f8"
+      }
+    ],
+    "gallery": [
+      "https://images.pexels.com/photos/9773757/pexels-photo-9773757.jpeg",
+      "https://images.unsplash.com/photo-1667388968964-4aa652df0a9b",
+      "https://images.unsplash.com/photo-1613274554329-70f997f5789f",
+      "https://images.unsplash.com/photo-1709548145082-04d0cde481d4"
+    ]
+  },
+  "animations": {
+    "scrolling": "Implement 'lenis' for smooth scrolling to give a premium feel.",
+    "elements": "Framer Motion for entrance animations (staggered fade-up for menu items). Hover states on cards should have a slight lift (-translate-y-1) and subtle shadow."
+  },
+  "icons": "lucide-react for standard UI icons (MapPin, Phone, Clock, Utensils).",
+  "specific_sections": {
+    "reservation_form": "Integrate Shadcn Form with Calendar/DatePicker. Ensure inputs have generous padding (p-6) and clear labels. Save to DB logic will be wired to backend.",
+    "services_strip": "Use the 'Marquee Strategy - Editorial Ribbon'. Low contrast background (Pale Linen #F2EFE9) with Dark Forest Green text, massive gaps (gap-24), slow smooth drift using react-fast-marquee.",
+    "footer": "Massive spacing (py-24). Dark theme contrast (bg-[#2A3B2C] text-[#FAF9F6]). Large typography for the 'Visit Us' CTA."
+  }
+}

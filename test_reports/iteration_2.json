@@ -1,0 +1,34 @@
+{
+  "summary": "Frontend iteration-2 testing for EMPIRE Restaurant. Verified landing section order, removal of old menu/reservation, navbar+Order Online CTA, hero CTAs, Chef's 3 picks, Explore Our Menu, full /menu page (search/categories/items/qty/add-to-cart), floating cart, cart drawer (qty inc/dec/remove/total), WhatsApp checkout URL construction (wa.me/917676556639 with correctly encoded order summary), continue-browsing close, and mobile menu at 390x844. Backend smoke check: GET /api/ 200, POST /api/reservations 200.",
+  "backend_issues": {"critical": [], "minor": []},
+  "frontend_issues": {
+    "ui_bugs": [],
+    "integration_issues": [],
+    "design_issues": [
+      {"screen": "Cart Drawer (Sheet)", "issues": ["A11y console warning: 'Missing Description or aria-describedby for DialogContent' from Radix Sheet. Functional impact: none. Suggest adding SheetDescription (visually hidden) inside SheetHeader to silence the warning and improve screen-reader UX."]}
+    ]
+  },
+  "test_report_links": [
+    "/app/backend/tests/test_empire_api.py",
+    "/app/test_reports/pytest/empire_results.xml"
+  ],
+  "action_items": [
+    "(Optional, low priority) Add a SheetDescription / aria-describedby to the Cart Drawer to silence Radix a11y warning."
+  ],
+  "critical_code_review_comments": [
+    "lib/whatsapp.js: WHATSAPP_NUMBER has a hardcoded fallback '917676556639'. Per env-var rule, prefer no default so missing config fails fast (currently env is set so works, but advisable to remove fallback).",
+    "CartDrawer.jsx: Sheet missing SheetDescription -> Radix warns about aria-describedby. Cosmetic but should be addressed.",
+    "MenuPage.jsx: window.scrollTo with behavior 'instant' is non-standard (should be 'auto' per spec). Works in Chromium but may warn in strict browsers.",
+    "FloatingCart hides via opacity-0 + pointer-events-none rather than unmounting - acceptable. data-testid still present in DOM when empty; test verified opacity-100 class flip on add.",
+    "Landing.jsx: IntersectionObserver cleanup is good. No leaks observed.",
+    "Header.jsx: hash-anchor navigation re-navigates via setTimeout(80) — works in tests but is a magic number; an effect-listening to location.hash would be more robust."
+  ],
+  "updated_files": [],
+  "success_rate": {"backend": "100% (GET /api/ + POST /api/reservations)", "frontend": "100% on all targeted flows"},
+  "test_credentials": "N/A - no auth in this app",
+  "seed_data_creation": "One TEST_Iter2 reservation POSTed during backend smoke check.",
+  "retest_needed": false,
+  "main_agent_can_self_test": true,
+  "context_for_next_testing_agent": "Public URL: https://family-dining-hub-18.preview.emergentagent.com. Run pytest /app/backend/tests/test_empire_api.py for backend regression. For WhatsApp window.open interception in Playwright use: page.evaluate('window.open = (url)=>{window.__lastOpenUrl=url}') BEFORE clicking checkout-whatsapp-btn, then read window.__lastOpenUrl. Cart drawer is shadcn Sheet (Radix dialog) — use force=True when clicking inside. Floating cart uses opacity-0 + pointer-events-none when empty; assert via class string, not is_visible.",
+  "rca of the issue": "No issues to RCA. All flows pass. Only cosmetic Radix a11y warning for missing dialog description."
+}

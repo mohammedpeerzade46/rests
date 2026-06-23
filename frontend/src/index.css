@@ -1,0 +1,282 @@
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Outfit:wght@300;400;500;600;700&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+    --empire-bg: #FAF9F6;
+    --empire-surface: #F2EFE9;
+    --empire-primary: #2A3B2C;
+    --empire-secondary: #E6E1D8;
+    --empire-accent: #C85A32;
+    --empire-accent-hover: #D96B43;
+    --empire-muted: #4A5D4E;
+    --empire-border: #E6E1D8;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    margin: 0;
+    font-family: 'Outfit', -apple-system, BlinkMacSystemFont, sans-serif;
+    background-color: var(--empire-bg);
+    color: var(--empire-primary);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+.font-serif-display {
+    font-family: 'Cormorant Garamond', serif;
+}
+
+.font-sans-body {
+    font-family: 'Outfit', sans-serif;
+}
+
+::selection {
+    background: var(--empire-accent);
+    color: #fff;
+}
+
+@layer base {
+    :root {
+        --background: 44 33% 97%;
+        --foreground: 120 16% 20%;
+        --card: 0 0% 100%;
+        --card-foreground: 120 16% 20%;
+        --popover: 0 0% 100%;
+        --popover-foreground: 120 16% 20%;
+        --primary: 124 16% 20%;
+        --primary-foreground: 44 33% 97%;
+        --secondary: 40 21% 88%;
+        --secondary-foreground: 124 16% 20%;
+        --muted: 40 21% 92%;
+        --muted-foreground: 120 11% 33%;
+        --accent: 17 60% 50%;
+        --accent-foreground: 0 0% 100%;
+        --destructive: 0 70% 45%;
+        --destructive-foreground: 0 0% 100%;
+        --border: 40 21% 86%;
+        --input: 40 21% 86%;
+        --ring: 17 60% 50%;
+        --radius: 0.375rem;
+    }
+}
+
+@layer base {
+    * { @apply border-border; }
+    body { @apply bg-background text-foreground; }
+}
+
+/* Editorial marquee for services strip */
+@keyframes marquee-drift {
+    0% { transform: translateX(0); }
+    100% { transform: translateX(-50%); }
+}
+
+.marquee-track {
+    display: flex;
+    width: max-content;
+    animation: marquee-drift 45s linear infinite;
+    gap: 6rem;
+}
+
+.marquee-track:hover { animation-play-state: paused; }
+
+/* Subtle grain overlay */
+.grain::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    background-image: radial-gradient(rgba(42, 59, 44, 0.06) 1px, transparent 1px);
+    background-size: 3px 3px;
+    mix-blend-mode: multiply;
+    opacity: 0.5;
+}
+
+/* Custom underline link */
+.underline-grow {
+    position: relative;
+    display: inline-block;
+}
+.underline-grow::after {
+    content: "";
+    position: absolute;
+    left: 0; bottom: -4px;
+    width: 100%;
+    height: 1px;
+    background: currentColor;
+    transform-origin: right;
+    transform: scaleX(0);
+    transition: transform 0.5s ease;
+}
+.underline-grow:hover::after {
+    transform-origin: left;
+    transform: scaleX(1);
+}
+
+/* Reveal */
+.reveal {
+    opacity: 0;
+    transform: translateY(24px);
+    transition: opacity 0.9s ease, transform 0.9s ease;
+}
+.reveal.in {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* Hide scrollbar utility (for sticky category nav) */
+.no-scrollbar::-webkit-scrollbar { display: none; }
+.no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+
+/* ---------- Hero cinematic motion ---------- */
+
+/* Hero shell — responsive height (svh for mobile to avoid 100vh address-bar jump) */
+.hero-shell {
+    height: 100svh;
+    min-height: 600px;
+}
+@media (min-width: 1024px) {
+    .hero-shell {
+        height: 100vh;
+        min-height: 720px;
+    }
+}
+
+/* Background image — desktop: centered; mobile: 58% center to keep dining + lamps visible */
+.hero-bg {
+    background-size: cover;
+    background-position: 58% center;
+    background-repeat: no-repeat;
+}
+@media (min-width: 1024px) {
+    .hero-bg {
+        background-position: center center;
+    }
+}
+
+/* Dark luxury overlay — desktop heavier, mobile slightly lighter to preserve detail */
+.hero-overlay-luxury {
+    background: linear-gradient(rgba(0, 0, 0, 0.45), rgba(0, 0, 0, 0.55));
+}
+@media (min-width: 1024px) {
+    .hero-overlay-luxury {
+        background: linear-gradient(rgba(0, 0, 0, 0.55), rgba(0, 0, 0, 0.65));
+    }
+}
+
+/* Warm amber glow — matches the restaurant's ceiling lights */
+.hero-overlay-amber {
+    background:
+        radial-gradient(60% 45% at 50% 18%, rgba(245, 178, 107, 0.32) 0%, transparent 65%),
+        radial-gradient(70% 55% at 50% 100%, rgba(200, 90, 50, 0.18) 0%, transparent 60%);
+    mix-blend-mode: screen;
+}
+
+/* Glassmorphism secondary CTA with warm gold accent */
+.hero-glass-btn {
+    background: rgba(255, 255, 255, 0.08);
+    border: 1px solid rgba(230, 179, 98, 0.55);
+    backdrop-filter: blur(14px) saturate(140%);
+    -webkit-backdrop-filter: blur(14px) saturate(140%);
+    box-shadow:
+        inset 0 1px 0 rgba(255, 255, 255, 0.12),
+        0 18px 40px -20px rgba(0, 0, 0, 0.45);
+    transition: background 0.35s ease, border-color 0.35s ease, transform 0.35s ease;
+}
+.hero-glass-btn:hover {
+    background: rgba(230, 179, 98, 0.18);
+    border-color: rgba(244, 224, 186, 0.8);
+}
+
+/* Slow Ken Burns zoom (applied to the bg layer) */
+@keyframes kenburns {
+    0%   { transform: scale(1.05) translate3d(0, 0, 0); }
+    50%  { transform: scale(1.12) translate3d(-1%, -0.8%, 0); }
+    100% { transform: scale(1.05) translate3d(0, 0, 0); }
+}
+.hero-kenburns {
+    animation: kenburns 24s ease-in-out infinite;
+    transform-origin: center center;
+    will-change: transform;
+}
+
+/* Soft warm light bloom drift */
+@keyframes bloomDrift1 {
+    0%, 100% { transform: translate3d(0, 0, 0) scale(1); opacity: 0.85; }
+    50%      { transform: translate3d(-3%, 2%, 0) scale(1.08); opacity: 1; }
+}
+@keyframes bloomDrift2 {
+    0%, 100% { transform: translate3d(0, 0, 0) scale(1); opacity: 0.7; }
+    50%      { transform: translate3d(3%, -2%, 0) scale(1.1); opacity: 0.9; }
+}
+.hero-bloom-1 { animation: bloomDrift1 18s ease-in-out infinite; will-change: transform, opacity; }
+.hero-bloom-2 { animation: bloomDrift2 22s ease-in-out infinite; will-change: transform, opacity; }
+
+/* Floating embers */
+@keyframes emberRise {
+    0%   { transform: translate3d(0, 100vh, 0) scale(0.6); opacity: 0; }
+    10%  { opacity: 0.8; }
+    50%  { transform: translate3d(20px, 50vh, 0) scale(1); opacity: 0.7; }
+    90%  { opacity: 0.4; }
+    100% { transform: translate3d(-15px, -8vh, 0) scale(0.7); opacity: 0; }
+}
+.hero-ember {
+    position: absolute;
+    bottom: -20px;
+    width: 4px;
+    height: 4px;
+    border-radius: 9999px;
+    background: rgba(245, 178, 107, 0.75);
+    box-shadow: 0 0 12px 2px rgba(245, 178, 107, 0.5);
+    animation: emberRise 22s ease-in infinite;
+    will-change: transform, opacity;
+}
+
+/* Content rise-in */
+@keyframes heroRise {
+    0%   { opacity: 0; transform: translateY(28px); }
+    100% { opacity: 1; transform: translateY(0); }
+}
+.hero-rise {
+    opacity: 0;
+    animation: heroRise 1.1s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+    will-change: opacity, transform;
+}
+
+/* Scroll cue line */
+@keyframes scrollPulse {
+    0%, 100% { transform: scaleY(0.3); transform-origin: top; opacity: 0.4; }
+    50%      { transform: scaleY(1); transform-origin: top; opacity: 1; }
+}
+.hero-scroll-line { animation: scrollPulse 2.6s ease-in-out infinite; }
+
+/* Respect reduced motion */
+@media (prefers-reduced-motion: reduce) {
+    .hero-kenburns,
+    .hero-bloom-1,
+    .hero-bloom-2,
+    .hero-ember,
+    .hero-rise,
+    .hero-scroll-line,
+    .marquee-track {
+        animation: none !important;
+    }
+}
+
+@layer base {
+    [data-debug-wrapper="true"] { display: contents !important; }
+    [data-debug-wrapper="true"] > * {
+        margin-left: inherit; margin-right: inherit; margin-top: inherit; margin-bottom: inherit;
+        padding-left: inherit; padding-right: inherit; padding-top: inherit; padding-bottom: inherit;
+        column-gap: inherit; row-gap: inherit; gap: inherit;
+        border-left-width: inherit; border-right-width: inherit; border-top-width: inherit; border-bottom-width: inherit;
+        border-left-style: inherit; border-right-style: inherit; border-top-style: inherit; border-bottom-style: inherit;
+        border-left-color: inherit; border-right-color: inherit; border-top-color: inherit; border-bottom-color: inherit;
+    }
+}
