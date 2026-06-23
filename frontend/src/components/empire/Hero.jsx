@@ -2,8 +2,7 @@ import React, { useEffect, useRef } from "react";
 import { Link } from "react-router-dom";
 import { MapPin, ArrowDownRight } from "lucide-react";
 
-const HERO_IMG =
-  "https://customer-assets.emergentagent.com/job_family-dining-hub-18/artifacts/ifl5c5y8_ChatGPT%20Image%20Jun%2023%2C%202026%2C%2004_46_03%20AM.png";
+const HERO_IMG = "/hero-image.png";
 
 export default function Hero() {
   const parallaxRef = useRef(null);

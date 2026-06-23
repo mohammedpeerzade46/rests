@@ -29,6 +29,6 @@
   "seed_data_creation": "One TEST_Iter2 reservation POSTed during backend smoke check.",
   "retest_needed": false,
   "main_agent_can_self_test": true,
-  "context_for_next_testing_agent": "Public URL: https://family-dining-hub-18.preview.emergentagent.com. Run pytest /app/backend/tests/test_empire_api.py for backend regression. For WhatsApp window.open interception in Playwright use: page.evaluate('window.open = (url)=>{window.__lastOpenUrl=url}') BEFORE clicking checkout-whatsapp-btn, then read window.__lastOpenUrl. Cart drawer is shadcn Sheet (Radix dialog) — use force=True when clicking inside. Floating cart uses opacity-0 + pointer-events-none when empty; assert via class string, not is_visible.",
+  "context_for_next_testing_agent": "Public URL: http://localhost:8000. Run pytest /app/backend/tests/test_empire_api.py for backend regression. For WhatsApp window.open interception in Playwright use: page.evaluate('window.open = (url)=>{window.__lastOpenUrl=url}') BEFORE clicking checkout-whatsapp-btn, then read window.__lastOpenUrl. Cart drawer is shadcn Sheet (Radix dialog) — use force=True when clicking inside. Floating cart uses opacity-0 + pointer-events-none when empty; assert via class string, not is_visible.",
   "rca of the issue": "No issues to RCA. All flows pass. Only cosmetic Radix a11y warning for missing dialog description."
 }

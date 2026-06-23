@@ -41,6 +41,6 @@
   "seed_data_creation": "Created 3 test reservations (TEST_Aarav, TEST_NoEmail, TEST_PW Final) and contact messages with TEST_ prefix in MongoDB. Safe to leave or purge.",
   "retest_needed": false,
   "main_agent_can_self_test": true,
-  "context_for_next_testing_agent": "Backend URL: https://family-dining-hub-18.preview.emergentagent.com. Run `pytest /app/backend/tests/test_empire_api.py -v` for backend regression. For reservation form Select components, use exact=True with get_by_role to avoid '4 guests' matching '14 guests'. Calendar popover uses react-day-picker - select via `button[name='day']:not([disabled])`. The 'reservation-confirmed' testid appears after successful submission.",
+  "context_for_next_testing_agent": "Backend URL: http://localhost:8000. Run `pytest /app/backend/tests/test_empire_api.py -v` for backend regression. For reservation form Select components, use exact=True with get_by_role to avoid '4 guests' matching '14 guests'. Calendar popover uses react-day-picker - select via `button[name='day']:not([disabled])`. The 'reservation-confirmed' testid appears after successful submission.",
   "rca of the issue": "Minor UX inconsistency only - empty form's sonner toast never appears because HTML5 `required` blocks submission first. Functional contract (no network call on invalid) is honored. Not a bug, just dead JS code path for that specific scenario."
 }
